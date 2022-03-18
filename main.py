@@ -1,21 +1,15 @@
-from pydoc import describe
 import discord
 from discord.ext import commands
 
 import time
 import random
-import yaml
-import json
+
 
 import nasa_api
 from reddit_api import get_pic_posts, get_user
+from utils import load_config
 
-
-client = commands.Bot(command_prefix='!')
-
-def load_config(filename):
-    with open(filename) as f:
-        return yaml.load(f, Loader=yaml.BaseLoader)
+client = commands.Bot(command_prefix=('!'))
 
 def get_chanel_id(name):
     chanel = discord.utils.get(client.get_all_channels(), name=name)
@@ -127,7 +121,6 @@ async def reddit(ctx, sub, amount=1):
         await last_message.reply('There is no images or GIFs from this subreddit')
         return
 
-    print(len(posts))
     for _ in range(amount):
         if posts:
             post = posts[random.randint(0, len(posts)-1)]
@@ -186,5 +179,5 @@ async def clear(ctx, amount=None):
 
 if __name__ == '__main__':
     #Loading the
-    config = load_config('bot_config.yml')
+    config = load_config('../bot_config.yml')
     client.run(config['token'])

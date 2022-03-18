@@ -4,7 +4,6 @@ from discord.ext import commands
 import time
 import random
 
-
 import nasa_api
 from reddit_api import get_pic_posts, get_user
 from utils import load_config

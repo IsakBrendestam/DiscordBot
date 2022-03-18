@@ -178,5 +178,5 @@ async def clear(ctx, amount=None):
 
 if __name__ == '__main__':
     #Loading the
-    config = load_config('../bot_config.yml')
+    config = load_config('../configs/bot_config.yml')
     client.run(config['token'])

@@ -5,7 +5,7 @@ from utils import load_config, save_config
 
 def authorize():
         #getting credentials
-    config = load_config('../reddit_credentials.yml')
+    config = load_config('../configs/reddit_credentials.yml')
 
     auth = requests.auth.HTTPBasicAuth(config['ClienntId'], config['SecretToken'])
 
@@ -23,10 +23,10 @@ def authorize():
 
     config['access_token'] = token
 
-    save_config(config, '../reddit_credentials.yml')
+    save_config(config, '../configs/reddit_credentials.yml')
 
 def get_headers():
-    config = load_config('../reddit_credentials.yml')
+    config = load_config('../configs/reddit_credentials.yml')
     headers = {'User-Agent': 'MyBot/0.0.1'}
     return {**headers, **{'Authorization': f"bearer {config['access_token']}"}}
 

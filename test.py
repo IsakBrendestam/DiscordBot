@@ -7,7 +7,7 @@ client = commands.Bot(command_prefix='>')
 
 client.load_extension('cogs.{0}'.format(filename[:-3]))
 
-client.run('OTQzNTIyODA2NTE4MzkwNzk0.Yg0SFg.nrBU7mC6N0vTvYXVfH_uta8pzcQ')
+client.run('')
 
 
 

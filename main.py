@@ -1,13 +1,29 @@
 import os
 
 import discord
-from discord.ext import commands
 
 from discord_components import ComponentsBot
 
 from utils import load_config
 
-intents = discord.Intents.default()
+
+import ctypes
+import ctypes.util
+
+# if not discord.opus.is_loaded():
+#     print("ctypes - Find opus:")
+#     a = ctypes.util.find_library('opus')
+#     print(a)
+    
+#     print("Discord - Load Opus:")
+#     b = discord.opus.load_opus(a)
+#     print(b)
+    
+#     print("Discord - Is loaded:")
+#     c = discord.opus.is_loaded()
+#     print(c)
+
+intents = discord.Intents().all()
 intents.members = True
 
 client = ComponentsBot(command_prefix='!',
@@ -20,7 +36,7 @@ if __name__ == '__main__':
         if filename.endswith(".py"):
             client.load_extension('cogs.{0}'.format(filename[:-3]))
 
-
+    # discord.opus.load_opus('opus')
     config = load_config('../configs/bot_config.yml')
     client.run(config['token'])
 

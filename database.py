@@ -10,13 +10,13 @@ class Database:
     def insert(self, data:dict):
         return self._table.insert_one(data)
 
-    def update(self, id, col, value:dict):
-        self._table.update_one({'id' : id}, {'$set': {col: value}})
+    def update(self, elem_id, elem_val, col, value:dict):
+        self._table.update_one({elem_id : elem_val}, {'$set': {col: value}})
 
-    def insert_to_list(self, id, col, value):
-        new_value = self.find({'id':id})[col]
+    def insert_to_list(self, elem_id, elem_val, col, value):
+        new_value = self.find({elem_id:elem_val})[col]
         new_value.append(value)
-        self.update(id, col, new_value)
+        self.update(elem_id, elem_val, col, new_value)
         
     def delete_all(self, col:str, value):
         self._table.delete_many({col: value})
@@ -50,6 +50,11 @@ class Users(Database):
         super().__init__()
         self._table = self._db.users
 
+class Servers(Database):
+    def __init__(self):
+        super().__init__()
+        self._table = self._db.Servers
+
 class Test(Database):
     def __init__(self):
         super().__init__()
@@ -60,11 +65,10 @@ def main():
         for elem in db.get_first(5):
             pprint(elem)
 
-    db = Users()
-
-    db.insert({'list':[{'a':1}, {'a':2}]})
+    db = Servers()
 
     inputs = {'1':print_top, '2':db.drop_table}
+
 
     running = True
     while running:
